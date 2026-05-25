@@ -3,8 +3,8 @@
 
 _pkgname=xwayland-satellite
 pkgname="$_pkgname-git"
-pkgver=0.6.r19.gba78881
-pkgrel=2
+pkgver=0.8.1.r6.g3273a0f
+pkgrel=1
 pkgdesc="Xwayland outside your Wayland - git version"
 arch=(x86_64)
 url="https://github.com/Supreeeme/$_pkgname"
@@ -33,10 +33,13 @@ pkgver() {
 
 prepare() {
 	cd $_pkgname
+	git config user.name "local"
+	git config user.email "<>"
+	git pull origin pull/423/head --no-ff --no-commit
 	export RUSTUP_TOOLCHAIN=stable
 	export CARGO_HOME="$srcdir"/.cargo
 	sed 's|/usr/local|/usr|' -i resources/$_pkgname.service
-	cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+	cargo fetch --locked --target "$(rustc --print host-tuple)"
 }
 
 build() {
