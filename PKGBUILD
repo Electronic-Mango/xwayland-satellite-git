@@ -3,7 +3,7 @@
 
 _pkgname=xwayland-satellite
 pkgname="$_pkgname-git"
-pkgver=0.8.1.r5.ga879e5e
+pkgver=0.8.1.r6.g3273a0f
 pkgrel=1
 pkgdesc="Xwayland outside your Wayland - git version"
 arch=(x86_64)
@@ -35,7 +35,6 @@ prepare() {
 	cd $_pkgname
 	git config user.name "local"
 	git config user.email "<>"
-	git reset --hard HEAD^
 	git pull origin pull/423/head --no-ff --no-commit
 	export RUSTUP_TOOLCHAIN=stable
 	export CARGO_HOME="$srcdir"/.cargo
